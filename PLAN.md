@@ -165,6 +165,8 @@ Clothing photos may reveal a user's body, home, location, or other personal info
 - Minimal personal-data collection
 - Export and deletion controls
 
+Detailed privacy behavior, retention periods, consent settings, deletion flows, export requirements, and acceptance criteria are defined in [`PRIVACY.md`](PRIVACY.md).
+
 ## Suggested Technical Architecture
 
 - Frontend: React Native or another mobile application framework
