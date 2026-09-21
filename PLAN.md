@@ -180,6 +180,15 @@ Detailed privacy behavior, retention periods, consent settings, deletion flows, 
 - Weather integration: weather API accessed only by the AI recommender using optional user location
 - Analytics: privacy-conscious product analytics
 
+## Operating Budget Targets
+
+- Current phase: local development with a target operating cost of `$0`.
+- Small demo phase: target `$0-$25` per month.
+- Small test group: target `$25-$100` per month.
+- Larger public application: expect costs to scale based on usage and potentially reach hundreds or thousands of dollars per month.
+- Control costs by limiting image size, processing each image once, caching AI results, and using rule-based recommendations whenever possible.
+- Choose AI and infrastructure providers based on cost, privacy, speed, model quality, and how user images are handled.
+
 ## Core Screens
 
 - Welcome and style onboarding
@@ -240,7 +249,8 @@ Detailed privacy behavior, retention periods, consent settings, deletion flows, 
 - Supported MVP styles: athletic, formal, business professional, casual, streetwear, and sleepwear.
 - Account model: multi-user support with private wardrobes.
 - Privacy policy and image-retention rules
-- AI provider and operating budget
+- AI provider: to be selected based on privacy, capability, and cost as development progresses.
+- Operating budget: local development now, with future targets of `$0-$25` per month for a small demo and `$25-$100` per month for a small test group.
 - Recommendations: primarily owned-clothing-only.
 - Shopping: separate item-search section with a search bar.
 - Location and weather: inputs only for the AI recommender.
