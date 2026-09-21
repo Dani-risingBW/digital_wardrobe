@@ -10,7 +10,8 @@ Create a digital wardrobe and AI styling assistant that helps users decide what 
 - Platform: mobile application.
 - Account model: multi-user support with private wardrobes for each user.
 - Project type: portfolio project.
-- Product name and visual identity: to be decided later.
+- Product name: Outfitted.
+- Visual identity: terracotta and olive color palette (warm, earthy, grounded), with a hanger-and-thread wordmark and icon.
 
 ## Core Features
 
@@ -61,7 +62,20 @@ Delay trend discovery, social sharing, calendar integrations, virtual try-on, ac
 - Use location and weather only as inputs to the AI recommender.
 - Treat multi-user support as a core requirement.
 - Scope the application as a portfolio project.
-- Defer the product name and visual identity.
+- Name the product Outfitted, with a terracotta and olive visual identity.
+
+## Product Name and Visual Identity
+
+- Product name: Outfitted.
+- Color palette: terracotta and olive, warm and earthy in tone.
+  - Terracotta #C96F4A — primary accent, used for the single primary action per screen (for example, the "wear this" button).
+  - Olive #6B7052 — secondary supporting color.
+  - Dusty rose #D9A79C — light accent for tags, chips, and highlights.
+  - Cream #F4EDE2 — background and card surfaces.
+  - Charcoal #2B2A28 — primary text and dark accents.
+- Logo mark: a minimalist hanger-and-thread icon, paired with the "outfitted" wordmark set in sentence case.
+- App icon: the hanger mark on a solid terracotta, olive, or charcoal rounded square, for use across icon sizes.
+- Brand tone: warm, grounded, and approachable rather than clinical or trend-chasing, matching a target audience that spans late teens through thirties.
 
 ## Wardrobe Data Model
 
@@ -229,7 +243,8 @@ Clothing photos may reveal a user's body, home, location, or other personal info
 - Shopping: separate item-search section with a search bar.
 - Location and weather: inputs only for the AI recommender.
 - Accessories: excluded from the MVP.
-- Product name and visual identity: deferred.
+- Product name: Outfitted.
+- Visual identity: terracotta and olive palette with a hanger-and-thread mark.
 - Scope: portfolio project.
 
 ## Product Principle
