@@ -22,9 +22,9 @@ Create a digital wardrobe and AI styling assistant that helps users decide what 
 - Pair tops, bottoms, dresses, outerwear, and shoes.
 - Build and save complete outfits.
 - Recommend daily outfits using the user's own clothing.
-- Learn from likes, dislikes, skips, edits, and outfits marked as worn.
+- Learn from required likes/dislikes and optional detailed feedback.
 - Support athletic, formal, business professional, casual, streetwear, and sleepwear styles.
-- Consider weather, season, occasion, dress code, clothing availability, and recent outfit history.
+- Consider weather, season, occasion, dress code, and recent outfit history.
 
 ## Recommended MVP
 
@@ -38,8 +38,9 @@ The first release should include:
 - A simple outfit builder.
 - Style preference onboarding.
 - Recommendations based only on owned clothing.
-- Like, dislike, skip, and worn feedback.
-- Weather and location used only by the AI recommender.
+- Required like/dislike feedback with optional detailed reasoning.
+- Several daily recommendation choices.
+- Device location permission available to the local AI recommender.
 - A shopping section with a search bar for finding specific items not currently owned.
 
 Delay trend discovery, social sharing, calendar integrations, virtual try-on, accessories, and community features until the core wardrobe experience is useful. Shopping search is part of the MVP, but shopping results should remain separate from owned-clothing outfit recommendations.
@@ -47,15 +48,15 @@ Delay trend discovery, social sharing, calendar integrations, virtual try-on, ac
 ## Product Decisions
 
 - Build the first version as a mobile app.
-- Decide whether users upload individual item photos, closet batches, or both.
-- Decide whether photos containing multiple items are supported.
-- Decide whether users confirm every AI classification or only corrections.
+- Support both individual item photos and batch uploads.
+- Allow photos containing multiple items when the user confirms each detected item.
+- Require users to review AI classifications before saving and allow edits later.
 - Allow users to create an item manually when a photo is unavailable.
 - Keep outfit recommendations focused on clothing the user owns.
 - Decide how much control users have over style preferences.
 - Support optional preferences for modesty, cultural requirements, religious requirements, gender expression, and comfort.
-- Decide whether the wardrobe tracks size, fit, condition, laundry status, and availability.
-- Decide whether recommendations should prevent frequent outfit repetition.
+- Track size and fit, but do not track wardrobe condition, laundry status, or availability.
+- Recommendations should provide several choices each day.
 - Support athletic, formal, business professional, casual, streetwear, and sleepwear in the MVP.
 - Keep accessories out of the MVP.
 - Include shopping search as a separate section for specific item discovery.
@@ -63,6 +64,10 @@ Delay trend discovery, social sharing, calendar integrations, virtual try-on, ac
 - Treat multi-user support as a core requirement.
 - Scope the application as a portfolio project.
 - Name the product Outfitted, with a terracotta and olive visual identity.
+- Support Google and Apple sign-in when cloud authentication is enabled.
+- Use Firebase Emulator Suite for local-only development.
+- Keep wardrobe data, images, AI processing, and recommendations inside the local environment for now.
+- Allow external data to leave the local environment only for user-initiated shopping searches and external product links.
 
 ## Product Name and Visual Identity
 
@@ -90,7 +95,6 @@ Each clothing item should support:
 - Season and weather suitability
 - Style tags
 - Brand and size
-- Condition and availability
 - User notes
 - Original and processed images
 
@@ -129,7 +133,6 @@ Daily recommendations may use:
 - Work or school dress code
 - Preferred styles and colors
 - Items worn recently
-- Clean and available items
 - Seasonality
 - Outfit variety
 - User feedback
@@ -170,15 +173,17 @@ Detailed privacy behavior, retention periods, consent settings, deletion flows, 
 ## Suggested Technical Architecture
 
 - Frontend: React Native or another mobile application framework
-- Backend: authenticated API service
-- Database: PostgreSQL
-- Image storage: S3-compatible object storage
+- Backend: Firebase, using the Firebase Local Emulator Suite during local development
+- Database: Firestore Emulator locally, with Cloud Firestore as a future option
+- Image storage: Cloud Storage Emulator locally, with Firebase Cloud Storage as a future option
 - Image pipeline: resizing, background removal, and thumbnail generation
-- AI services: vision model for classification and tagging
+- AI services: local vision model or local processing for classification and tagging
 - Recommendation engine: rules plus behavioral ranking
 - Background jobs: asynchronous image processing and recommendation generation
-- Weather integration: weather API accessed only by the AI recommender using optional user location
+- Location integration: device location permission is available to the local AI recommender; no location is sent to an external weather service in the local-only MVP
 - Analytics: privacy-conscious product analytics
+
+Firebase is the selected backend platform for the cloud-ready architecture. During local development, use the Firebase Local Emulator Suite so authentication, Firestore, Cloud Storage, and Cloud Functions data remain local. Cloud Firebase services are deferred until the privacy model and deployment decision are revisited.
 
 ## Operating Budget Targets
 
@@ -197,7 +202,7 @@ Detailed privacy behavior, retention periods, consent settings, deletion flows, 
 - Closet grid
 - Item detail and editing
 - Outfit builder
-- Daily recommendation
+- Daily recommendations with several choices
 - Recommendation explanation
 - Outfit history
 - Shopping search
@@ -216,6 +221,7 @@ Detailed privacy behavior, retention periods, consent settings, deletion flows, 
 - Time required to create an outfit
 - Recommendation rejection reasons
 - Closet browsing frequency
+- Required like/dislike response rate
 
 ## Major Risks
 
@@ -224,6 +230,7 @@ Detailed privacy behavior, retention periods, consent settings, deletion flows, 
 - Recommendations become repetitive.
 - Trend recommendations become inaccurate or culturally insensitive.
 - Image processing becomes expensive.
+- Strict local-only processing limits live weather and external AI integrations.
 - Users do not trust the application with personal photos.
 - Large wardrobes become difficult to manage.
 - Fashion compatibility is subjective and difficult to measure.
@@ -237,7 +244,7 @@ Detailed privacy behavior, retention periods, consent settings, deletion flows, 
 4. Add AI tagging with manual correction.
 5. Build outfit pairing rules.
 6. Add personalized recommendations and feedback.
-7. Add location and weather context to the AI recommender only.
+7. Add device location context to the local AI recommender without sending location externally.
 8. Add trend-based styling.
 9. Test with a small group of users.
 10. Improve recommendation quality using real behavior.
@@ -248,13 +255,22 @@ Detailed privacy behavior, retention periods, consent settings, deletion flows, 
 - Platform: mobile app.
 - Supported MVP styles: athletic, formal, business professional, casual, streetwear, and sleepwear.
 - Account model: multi-user support with private wardrobes.
-- Privacy policy and image-retention rules
-- AI provider: to be selected based on privacy, capability, and cost as development progresses.
+- Authentication: Firebase Auth Emulator locally, with Google and Apple sign-in planned for a future cloud-enabled phase.
+- Database and storage: Firebase Emulator Suite locally; cloud Firebase remains a future option.
+- Privacy policy and image-retention rules: strict local-only processing for now.
+- AI provider: local AI or local rule-based processing during development; no wardrobe data or images sent to external AI providers.
 - Operating budget: local development now, with future targets of `$0-$25` per month for a small demo and `$25-$100` per month for a small test group.
+- Recommendations: several choices each day with required like/dislike feedback and optional detailed reasoning.
 - Recommendations: primarily owned-clothing-only.
-- Shopping: separate item-search section with a search bar.
-- Location and weather: inputs only for the AI recommender.
+- Shopping: separate item-search section with a search bar and external links in results.
+- Location: device permission may be used locally by the AI recommender.
+- MVP categories: tops, bottoms, dresses, shoes, sleepwear, jackets, coats, sweaters, and skirts.
+- Style tags: one item may have multiple style tags.
+- Wardrobe status: not tracked.
+- Uploads: support individual and batch flows; review AI tags before saving and edit them later.
 - Accessories: excluded from the MVP.
+- Minimum age: 13.
+- Data boundary: no data leaves the local environment except user-initiated shopping searches and external shopping links.
 - Product name: Outfitted.
 - Visual identity: terracotta and olive palette with a hanger-and-thread mark.
 - Scope: portfolio project.

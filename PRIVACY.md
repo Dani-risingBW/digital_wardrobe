@@ -10,6 +10,8 @@ This document defines the privacy behavior for Outfitted. It is an implementatio
 - User photos are not used to train general-purpose AI models unless the user explicitly opts in.
 - Exact GPS coordinates are not stored by default.
 - Location and weather are used only by the AI recommender.
+- The local-development MVP keeps wardrobe data, images, location, and recommendation inputs inside the local environment.
+- The only external-data exception is a user-initiated shopping search and its external product links.
 - Optional analytics and AI-training consent are separate from consent required to use the wardrobe.
 - Users can delete individual images, clothing items, history, or their entire account.
 
@@ -27,12 +29,12 @@ This document defines the privacy behavior for Outfitted. It is an implementatio
 - Original clothing photos
 - Processed clothing photos and thumbnails
 - Clothing category, color, pattern, material, fit, size, brand, and style tags
-- Availability, condition, and user notes
+- User notes
 
 ### Recommendation Data
 
 - Style preferences
-- Outfit likes, dislikes, skips, edits, saves, and worn history
+- Required outfit likes/dislikes, optional detailed reasoning, edits, saves, and outfit history
 - Selected occasions and dress-code preferences
 - Recommendation explanations and feedback
 
@@ -188,6 +190,7 @@ For every vendor, document the data shared, purpose, retention behavior, securit
 
 ## Required Acceptance Criteria
 
+- Account creation requires confirmation that the user is at least 13.
 - A new wardrobe is private and cannot be accessed by another account.
 - Image-processing consent is shown before the first upload.
 - AI-training consent is off by default.
